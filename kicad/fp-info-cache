@@ -1,4 +1,4 @@
-15973473555610776
+15976853488822450
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -48041,7 +48041,7 @@ kicad_mylib
 12
 12
 kicad_mylib
-akizuki_100mm_100mm_plate
+akizuki_B_plate_lower_right
 
 
 0
@@ -48097,6 +48097,13 @@ SeeedXIAO
 34
 20
 kicad_mylib
+SENO0193
+
+
+0
+3
+3
+kicad_mylib
 SHT-31
 
 
@@ -48110,6 +48117,13 @@ SHT-31_aliexpress
 0
 6
 6
+kicad_mylib
+signature_koino
+
+
+0
+0
+0
 kicad_mylib
 SW_PUSH_2pin
 

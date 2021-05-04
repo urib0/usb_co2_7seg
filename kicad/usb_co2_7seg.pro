@@ -15,7 +15,7 @@ LibDir=
 [pcbnew]
 version=1
 PageLayoutDescrFile=
-LastNetListRead=usb_soil_moisture.net
+LastNetListRead=usb_co2_7seg.net
 CopperLayerCount=2
 BoardThickness=1.6
 AllowMicroVias=0

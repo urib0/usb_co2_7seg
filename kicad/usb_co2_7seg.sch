@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:usb_soil_moisture-cache
 EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
@@ -23,28 +22,6 @@ F 1 "SeeeduinoXIAO" H 3375 2020 50  0000 C CNN
 F 2 "kicad_mylib:SeeedXIAO" H 3050 3250 50  0001 C CNN
 F 3 "" H 3050 3250 50  0001 C CNN
 	1    3400 3050
-	1    0    0    -1  
-$EndComp
-$Comp
-L kicad_mylib:MH-Z19B U4
-U 1 1 60785EDD
-P 2550 4450
-F 0 "U4" H 2925 4675 50  0000 C CNN
-F 1 "MH-Z19B" H 2925 4584 50  0000 C CNN
-F 2 "kicad_mylib:MH-Z19B" H 2650 4550 50  0001 C CNN
-F 3 "" H 2650 4550 50  0001 C CNN
-	1    2550 4450
-	1    0    0    -1  
-$EndComp
-$Comp
-L kicad_mylib:TM1637 U5
-U 1 1 6078679C
-P 6850 4150
-F 0 "U5" H 7175 5865 50  0000 C CNN
-F 1 "TM1637" H 7175 5774 50  0000 C CNN
-F 2 "kicad_mylib:TM1630" H 6900 5750 50  0001 C CNN
-F 3 "" H 6900 5750 50  0001 C CNN
-	1    6850 4150
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -111,7 +88,7 @@ F 3 "" H 1750 3700 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	4950 2600 4200 2600
+	4950 2600 4300 2600
 $Comp
 L kicad_mylib:PinHeader_XIAO U2
 U 1 1 60791162
@@ -441,15 +418,6 @@ Wire Wire Line
 Wire Wire Line
 	2550 4450 2100 4450
 Wire Wire Line
-	2550 5050 2400 5050
-Wire Wire Line
-	2400 5050 2400 3350
-Wire Wire Line
-	2550 3350 2400 3350
-Wire Wire Line
-	2400 3350 1800 3350
-Connection ~ 2400 3350
-Wire Wire Line
 	7600 3000 8050 3000
 Wire Wire Line
 	8200 3000 8200 5150
@@ -627,4 +595,45 @@ Wire Wire Line
 Connection ~ 2000 2750
 Wire Wire Line
 	2000 2750 2550 2750
+Wire Wire Line
+	1800 3350 2550 3350
+NoConn ~ 2550 5050
+$Comp
+L power:+5V #PWR01
+U 1 1 608CEBC4
+P 4300 2500
+F 0 "#PWR01" H 4300 2350 50  0001 C CNN
+F 1 "+5V" H 4315 2673 50  0000 C CNN
+F 2 "" H 4300 2500 50  0001 C CNN
+F 3 "" H 4300 2500 50  0001 C CNN
+	1    4300 2500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4300 2500 4300 2600
+Connection ~ 4300 2600
+Wire Wire Line
+	4300 2600 4200 2600
+$Comp
+L kicad_mylib:MH-Z19B U4
+U 1 1 609198A9
+P 2550 4450
+F 0 "U4" H 2925 4675 50  0000 C CNN
+F 1 "MH-Z19B" H 2925 4584 50  0000 C CNN
+F 2 "kicad_mylib:MH-Z19B" H 2650 4550 50  0001 C CNN
+F 3 "" H 2650 4550 50  0001 C CNN
+	1    2550 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L kicad_mylib:TM1637 U5
+U 1 1 6091AFF2
+P 6850 4150
+F 0 "U5" H 7175 5865 50  0000 C CNN
+F 1 "TM1637" H 7175 5774 50  0000 C CNN
+F 2 "kicad_mylib:TM1630" H 6900 5750 50  0001 C CNN
+F 3 "" H 6900 5750 50  0001 C CNN
+	1    6850 4150
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
