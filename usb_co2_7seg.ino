@@ -1,14 +1,16 @@
 #include "TM1637.h"
 
-#define LED_ON LOW
-#define LED_OFF HIGH
+#define LED_ON HIGH
+#define LED_OFF LOW
+#define PIN_LED 0
 #define PIN_SW1 3
 #define PIN_SW2 2
-#define INTERVAL_UPDATE 1000
-#define INTERVAL_LOOP 1
-#define SERIAL_TX_MARGIN 13
 #define PIN_CLK 7
 #define PIN_DIO 8
+#define INTERVAL_UPDATE 1000
+#define INTERVAL_LOOP 1
+#define THRESHOLD 800
+#define SERIAL_TX_MARGIN 13
 #define STRING_MAX 4
 
 typedef unsigned char uchar;
@@ -23,7 +25,9 @@ void setup()
     int dummy = 0;
 
     digitalWrite(LED_BUILTIN, LED_OFF);
+    digitalWrite(PIN_LED, LED_OFF);
     pinMode(LED_BUILTIN, OUTPUT);
+    pinMode(PIN_LED, OUTPUT);
     pinMode(PIN_SW1, INPUT);
     pinMode(PIN_SW2, INPUT);
 
@@ -59,8 +63,17 @@ void loop()
         Serial.print("co2=");
         if (0 == status)
         {
+            if (value < THRESHOLD)
+            {
+                digitalWrite(PIN_LED, LED_OFF);
+            }
+            else
+            {
+                digitalWrite(PIN_LED, LED_ON);
+            }
             Serial.print(value, DEC);
             int_to_char_arr(value, sc_strings, &arr_size);
+            tm.clearDisplay();
             for (uchar uc_loop_cnt = 0; uc_loop_cnt < arr_size; uc_loop_cnt++)
             {
                 tm.setDigit(STRING_MAX - uc_loop_cnt - 1, sc_strings[uc_loop_cnt] - 0x30, false);
