@@ -32,11 +32,12 @@ void setup()
     pinMode(PIN_SW2, INPUT);
 
     Serial.begin(9600);
+    /*
     while (!Serial)
     {
         ; // wait for serial port to connect
     }
-
+    */
     tm.init();
 
     usb_mhz14a_init();
