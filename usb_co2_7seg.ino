@@ -60,7 +60,6 @@ void loop()
     if (0 == usb_mhz14a_co2_is_ready())
     {
         co2_status = usb_mhz14a_get_co2(&co2_value);
-        Serial.print("co2=");
         if (0 == co2_status)
         {
             if (co2_value < THRESHOLD)
@@ -71,12 +70,9 @@ void loop()
             {
                 digitalWrite(PIN_LED, LED_ON);
             }
-            Serial.print(val, DEC);
+            print_serial(co2_value, co2_status);
             print_7digit_led(co2_value);
         }
-        Serial.print(";status=");
-        Serial.print(co2_status);
-        Serial.print("\n");
     }
 
     // インターバル処理
@@ -102,11 +98,20 @@ void loop()
     delay(INTERVAL_LOOP);
 }
 
-void print_7digit_led(int val)
+void print_serial(int co2_val, int co2_status)
+{
+    Serial.print("co2=");
+    Serial.print(co2_val, DEC);
+    Serial.print(";status=");
+    Serial.print(co2_status);
+    Serial.print("\n");
+}
+
+void print_7digit_led(int co2_val)
 {
     uchar string_size = 0;
 
-    int_to_char_arr(val, co2_strings, &string_size);
+    int_to_char_arr(co2_val, co2_strings, &string_size);
     tm.clearDisplay();
     for (uchar uc_loop_cnt = 0; uc_loop_cnt < string_size; uc_loop_cnt++)
     {
