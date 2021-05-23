@@ -9,7 +9,7 @@
 #define PIN_CLK 7
 #define PIN_DIO 8
 #define INTERVAL_UPDATE 1000
-#define INTERVAL_LOOP 1
+#define INTERVAL_LOOP 10
 #define SW_LONG_PUSH_TIME 3
 #define THRESHOLD 800
 #define SERIAL_TX_MARGIN 13
