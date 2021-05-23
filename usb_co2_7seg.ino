@@ -10,9 +10,12 @@
 #define PIN_DIO 8
 #define INTERVAL_UPDATE 1000
 #define INTERVAL_LOOP 1
+#define SW_LONG_PUSH_TIME 3
 #define THRESHOLD 800
 #define SERIAL_TX_MARGIN 13
 #define STRING_MAX 4
+#define RESULT_OK 0
+#define RESULT_NG 1
 
 typedef unsigned char uchar;
 typedef unsigned int uint;
@@ -57,6 +60,14 @@ void loop()
     if (0 >= interval_cnt)
     {
         usb_mhz14a_co2_request();
+        if (RESULT_OK == check_sw_long_push())
+        {
+            digitalWrite(PIN_LED, LED_ON);
+        }
+        else
+        {
+            digitalWrite(PIN_LED, LED_OFF);
+        }
     }
     else if (0 == usb_mhz14a_co2_is_ready())
     {
@@ -93,6 +104,28 @@ void loop()
     interval_cnt -= INTERVAL_LOOP;
 
     delay(INTERVAL_LOOP);
+}
+
+int check_sw_long_push()
+{
+    static int si_long_push_cnt = SW_LONG_PUSH_TIME;
+    int ret = RESULT_NG;
+
+    if (SW_ON == digitalRead(PIN_SW1))
+    {
+        si_long_push_cnt--;
+    }
+    else
+    {
+        si_long_push_cnt = SW_LONG_PUSH_TIME;
+    }
+
+    if (0 >= si_long_push_cnt)
+    {
+        ret = RESULT_OK;
+    }
+
+    return ret;
 }
 
 void int_to_char_arr(int num, char *buff, uchar *size)
