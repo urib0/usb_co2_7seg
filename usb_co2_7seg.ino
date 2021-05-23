@@ -52,8 +52,8 @@ void setup()
 
 void loop()
 {
-    int co2_value = 0;
-    int co2_status = 0;
+    static int co2_value = 0;
+    static int co2_status = 0;
     static int interval_cnt = INTERVAL_UPDATE;
 
     // ポーリング処理
@@ -70,14 +70,14 @@ void loop()
             {
                 digitalWrite(PIN_LED, LED_ON);
             }
-            print_serial(co2_value, co2_status);
-            print_7digit_led(co2_value);
         }
     }
 
     // インターバル処理
     if (0 >= interval_cnt)
     {
+        print_serial(co2_value, co2_status);
+        print_7digit_led(co2_value);
         usb_mhz14a_co2_request();
         if (RESULT_OK == check_sw_long_push())
         {
