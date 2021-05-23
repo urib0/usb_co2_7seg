@@ -54,7 +54,6 @@ void loop()
 {
     int co2_value = 0;
     int co2_status = 0;
-    uchar string_size = 0;
     static int interval_cnt = INTERVAL_UPDATE;
 
     // ポーリング処理
@@ -72,14 +71,8 @@ void loop()
             {
                 digitalWrite(PIN_LED, LED_ON);
             }
-            Serial.print(co2_value, DEC);
-            int_to_char_arr(co2_value, co2_strings, &string_size);
-            tm.clearDisplay();
-            for (uchar uc_loop_cnt = 0; uc_loop_cnt < string_size; uc_loop_cnt++)
-            {
-                tm.setDigit(STRING_MAX - uc_loop_cnt - 1, co2_strings[uc_loop_cnt] - 0x30, false);
-            }
-            buff_clr(co2_strings, STRING_MAX + 1);
+            Serial.print(val, DEC);
+            print_7digit_led(co2_value);
         }
         Serial.print(";status=");
         Serial.print(co2_status);
@@ -107,6 +100,19 @@ void loop()
     interval_cnt -= INTERVAL_LOOP;
 
     delay(INTERVAL_LOOP);
+}
+
+void print_7digit_led(int val)
+{
+    uchar string_size = 0;
+
+    int_to_char_arr(val, co2_strings, &string_size);
+    tm.clearDisplay();
+    for (uchar uc_loop_cnt = 0; uc_loop_cnt < string_size; uc_loop_cnt++)
+    {
+        tm.setDigit(STRING_MAX - uc_loop_cnt - 1, co2_strings[uc_loop_cnt] - 0x30, false);
+    }
+    buff_clr(co2_strings, STRING_MAX + 1);
 }
 
 int check_sw_long_push()
