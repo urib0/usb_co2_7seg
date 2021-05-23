@@ -62,17 +62,17 @@ void loop()
         co2_status = usb_mhz14a_get_co2(&co2_value);
         if (0 == co2_status)
         {
-            print_warning_led(co2_value);
+            writeIndicator(oo2_value);
         }
     }
 
     // インターバル処理
     if (0 >= interval_cnt)
     {
-        print_serial(co2_value, co2_status);
-        print_7digit_led(co2_value);
+        writeSerial(co2_value, co2_status);
+        writeDisplay(co2_value);
         usb_mhz14a_co2_request();
-        if (RESULT_OK == check_sw_long_push())
+        if (RESULT_OK == check_sw_long_push(PIN_SW1))
         {
             digitalWrite(PIN_LED, LED_ON);
         }
@@ -91,7 +91,7 @@ void loop()
     delay(INTERVAL_LOOP);
 }
 
-void print_warning_led()
+void writeIndicator(int co2_value)
 {
     if (co2_value < THRESHOLD)
     {
@@ -103,7 +103,7 @@ void print_warning_led()
     }
 }
 
-void print_serial(int co2_val, int co2_status)
+void writeSerial(int co2_val, int co2_status)
 {
     Serial.print("co2=");
     Serial.print(co2_val, DEC);
@@ -112,7 +112,7 @@ void print_serial(int co2_val, int co2_status)
     Serial.print("\n");
 }
 
-void print_7digit_led(int co2_val)
+void writeDisplay(int co2_val)
 {
     uchar string_size = 0;
 
@@ -125,12 +125,12 @@ void print_7digit_led(int co2_val)
     buff_clr(co2_strings, STRING_MAX + 1);
 }
 
-int check_sw_long_push()
+int check_sw_long_push(int pin)
 {
     static int long_push_cnt = SW_LONG_PUSH_TIME;
     int ret = RESULT_NG;
 
-    if (SW_ON == digitalRead(PIN_SW1))
+    if (SW_ON == digitalRead(pin))
     {
         long_push_cnt--;
     }
