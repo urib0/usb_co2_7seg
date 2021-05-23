@@ -2,9 +2,10 @@
 
 #define LED_ON HIGH
 #define LED_OFF LOW
+#define SW_ON LOW
+#define SW_OFF HIGH
 #define PIN_LED 0
-#define PIN_SW1 3
-#define PIN_SW2 2
+#define PIN_SW1 1
 #define PIN_CLK 7
 #define PIN_DIO 8
 #define INTERVAL_UPDATE 1000
@@ -29,7 +30,6 @@ void setup()
     pinMode(LED_BUILTIN, OUTPUT);
     pinMode(PIN_LED, OUTPUT);
     pinMode(PIN_SW1, INPUT);
-    pinMode(PIN_SW2, INPUT);
 
     Serial.begin(9600);
     /*
