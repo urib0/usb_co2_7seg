@@ -60,7 +60,7 @@ void usb_mhz14a_init()
 {
   mySerial.begin(9600);
   delay(10);
-  usb_mhz14a_abc_on();
+  usb_mhz14a_abc_off();
   delay(10);
 }
 
