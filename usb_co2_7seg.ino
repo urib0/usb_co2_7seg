@@ -62,7 +62,7 @@ void loop()
         co2_status = usb_mhz14a_get_co2(&co2_value);
         if (0 == co2_status)
         {
-            writeIndicator(oo2_value);
+            writeIndicator(co2_value);
         }
     }
 
