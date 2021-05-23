@@ -62,14 +62,7 @@ void loop()
         co2_status = usb_mhz14a_get_co2(&co2_value);
         if (0 == co2_status)
         {
-            if (co2_value < THRESHOLD)
-            {
-                digitalWrite(PIN_LED, LED_OFF);
-            }
-            else
-            {
-                digitalWrite(PIN_LED, LED_ON);
-            }
+            print_warning_led(co2_value);
         }
     }
 
@@ -96,6 +89,18 @@ void loop()
     interval_cnt -= INTERVAL_LOOP;
 
     delay(INTERVAL_LOOP);
+}
+
+void print_warning_led()
+{
+    if (co2_value < THRESHOLD)
+    {
+        digitalWrite(PIN_LED, LED_OFF);
+    }
+    else
+    {
+        digitalWrite(PIN_LED, LED_ON);
+    }
 }
 
 void print_serial(int co2_val, int co2_status)
