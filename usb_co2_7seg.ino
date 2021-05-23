@@ -22,11 +22,11 @@ typedef unsigned int uint;
 
 TM1637 tm = TM1637(PIN_CLK, PIN_DIO);
 
-static char sc_strings[STRING_MAX + 1] = {0};
+static char co2_strings[STRING_MAX + 1] = {0};
 
 void setup()
 {
-    int dummy = 0;
+    int co2_dummy = 0;
 
     digitalWrite(LED_BUILTIN, LED_OFF);
     digitalWrite(PIN_LED, LED_OFF);
@@ -46,25 +46,25 @@ void setup()
     usb_mhz14a_init();
     usb_mhz14a_co2_request();
     delay(100);
-    usb_mhz14a_get_co2(&dummy);
+    usb_mhz14a_get_co2(&co2_dummy);
     digitalWrite(LED_BUILTIN, LED_ON);
 }
 
 void loop()
 {
-    int value = 0;
-    int status = 0;
-    uchar arr_size = 0;
+    int co2_value = 0;
+    int co2_status = 0;
+    uchar string_size = 0;
     static int interval_cnt = INTERVAL_UPDATE;
 
     // ポーリング処理
     if (0 == usb_mhz14a_co2_is_ready())
     {
-        status = usb_mhz14a_get_co2(&value);
+        co2_status = usb_mhz14a_get_co2(&co2_value);
         Serial.print("co2=");
-        if (0 == status)
+        if (0 == co2_status)
         {
-            if (value < THRESHOLD)
+            if (co2_value < THRESHOLD)
             {
                 digitalWrite(PIN_LED, LED_OFF);
             }
@@ -72,17 +72,17 @@ void loop()
             {
                 digitalWrite(PIN_LED, LED_ON);
             }
-            Serial.print(value, DEC);
-            int_to_char_arr(value, sc_strings, &arr_size);
+            Serial.print(co2_value, DEC);
+            int_to_char_arr(co2_value, co2_strings, &string_size);
             tm.clearDisplay();
-            for (uchar uc_loop_cnt = 0; uc_loop_cnt < arr_size; uc_loop_cnt++)
+            for (uchar uc_loop_cnt = 0; uc_loop_cnt < string_size; uc_loop_cnt++)
             {
-                tm.setDigit(STRING_MAX - uc_loop_cnt - 1, sc_strings[uc_loop_cnt] - 0x30, false);
+                tm.setDigit(STRING_MAX - uc_loop_cnt - 1, co2_strings[uc_loop_cnt] - 0x30, false);
             }
-            buff_clr(sc_strings, STRING_MAX + 1);
+            buff_clr(co2_strings, STRING_MAX + 1);
         }
         Serial.print(";status=");
-        Serial.print(status);
+        Serial.print(co2_status);
         Serial.print("\n");
     }
 
@@ -111,19 +111,19 @@ void loop()
 
 int check_sw_long_push()
 {
-    static int si_long_push_cnt = SW_LONG_PUSH_TIME;
+    static int long_push_cnt = SW_LONG_PUSH_TIME;
     int ret = RESULT_NG;
 
     if (SW_ON == digitalRead(PIN_SW1))
     {
-        si_long_push_cnt--;
+        long_push_cnt--;
     }
     else
     {
-        si_long_push_cnt = SW_LONG_PUSH_TIME;
+        long_push_cnt = SW_LONG_PUSH_TIME;
     }
 
-    if (0 >= si_long_push_cnt)
+    if (0 >= long_push_cnt)
     {
         ret = RESULT_OK;
     }
