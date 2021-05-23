@@ -57,19 +57,8 @@ void loop()
     uchar arr_size = 0;
     static int interval_cnt = INTERVAL_UPDATE;
 
-    if (0 >= interval_cnt)
-    {
-        usb_mhz14a_co2_request();
-        if (RESULT_OK == check_sw_long_push())
-        {
-            digitalWrite(PIN_LED, LED_ON);
-        }
-        else
-        {
-            digitalWrite(PIN_LED, LED_OFF);
-        }
-    }
-    else if (0 == usb_mhz14a_co2_is_ready())
+    // ポーリング処理
+    if (0 == usb_mhz14a_co2_is_ready())
     {
         status = usb_mhz14a_get_co2(&value);
         Serial.print("co2=");
@@ -95,6 +84,20 @@ void loop()
         Serial.print(";status=");
         Serial.print(status);
         Serial.print("\n");
+    }
+
+    // インターバル処理
+    if (0 >= interval_cnt)
+    {
+        usb_mhz14a_co2_request();
+        if (RESULT_OK == check_sw_long_push())
+        {
+            digitalWrite(PIN_LED, LED_ON);
+        }
+        else
+        {
+            digitalWrite(PIN_LED, LED_OFF);
+        }
     }
 
     if (0 >= interval_cnt)
