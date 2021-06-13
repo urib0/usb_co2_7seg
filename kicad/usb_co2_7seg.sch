@@ -397,7 +397,7 @@ Wire Wire Line
 Wire Wire Line
 	2550 2900 2100 2900
 Wire Wire Line
-	2100 4450 2100 2900
+	2100 4450 2100 4150
 Connection ~ 2100 2900
 Wire Wire Line
 	2100 2900 1800 2900
@@ -636,4 +636,106 @@ F 3 "" H 6900 5750 50  0001 C CNN
 	1    6850 4150
 	1    0    0    -1  
 $EndComp
+$Comp
+L kicad_mylib:MH-Z14A U8
+U 1 1 60C66D31
+P 2400 5650
+F 0 "U8" H 2975 5915 50  0000 C CNN
+F 1 "MH-Z14A" H 2975 5824 50  0000 C CNN
+F 2 "kicad_mylib:MH-Z14A" H 2550 5800 50  0001 C CNN
+F 3 "" H 2550 5800 50  0001 C CNN
+	1    2400 5650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2400 5750 2300 5750
+Wire Wire Line
+	2300 5750 2300 4900
+Connection ~ 2300 4900
+Wire Wire Line
+	2400 5650 2200 5650
+Wire Wire Line
+	2200 5650 2200 4750
+Connection ~ 2200 4750
+$Comp
+L power:+5V #PWR03
+U 1 1 60C7A267
+P 3750 5350
+F 0 "#PWR03" H 3750 5200 50  0001 C CNN
+F 1 "+5V" H 3765 5523 50  0000 C CNN
+F 2 "" H 3750 5350 50  0001 C CNN
+F 3 "" H 3750 5350 50  0001 C CNN
+	1    3750 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR02
+U 1 1 60C7A8E0
+P 3650 6950
+F 0 "#PWR02" H 3650 6700 50  0001 C CNN
+F 1 "GND" H 3655 6777 50  0000 C CNN
+F 2 "" H 3650 6950 50  0001 C CNN
+F 3 "" H 3650 6950 50  0001 C CNN
+	1    3650 6950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3550 6050 3650 6050
+Wire Wire Line
+	3550 5950 3750 5950
+Wire Wire Line
+	3550 6550 3650 6550
+Wire Wire Line
+	3650 6550 3650 6750
+Wire Wire Line
+	2400 5950 2300 5950
+Wire Wire Line
+	2300 5950 2300 6150
+Wire Wire Line
+	2300 6750 3650 6750
+Connection ~ 3650 6750
+Wire Wire Line
+	3650 6750 3650 6950
+Wire Wire Line
+	2400 6150 2300 6150
+Connection ~ 2300 6150
+Wire Wire Line
+	2300 6150 2300 6750
+NoConn ~ 3550 5750
+NoConn ~ 3550 5850
+NoConn ~ 3550 6150
+NoConn ~ 3550 6250
+NoConn ~ 3550 6450
+Wire Wire Line
+	3750 5350 3750 5400
+Wire Wire Line
+	2100 5400 3750 5400
+Connection ~ 3750 5400
+Wire Wire Line
+	3750 5400 3750 5950
+Wire Wire Line
+	2100 5400 2100 5850
+Connection ~ 2100 5850
+Wire Wire Line
+	2100 5850 2100 6050
+NoConn ~ 2400 6250
+NoConn ~ 2400 6350
+NoConn ~ 2400 6450
+NoConn ~ 2400 6550
+Connection ~ 3650 6550
+Wire Wire Line
+	3650 6050 3650 6550
+Wire Wire Line
+	2100 6050 2400 6050
+Wire Wire Line
+	2100 5850 2400 5850
+Wire Wire Line
+	3550 6350 3850 6350
+Wire Wire Line
+	3850 6350 3850 4150
+Wire Wire Line
+	3850 4150 2100 4150
+Connection ~ 2100 4150
+Wire Wire Line
+	2100 4150 2100 2900
 $EndSCHEMATC
